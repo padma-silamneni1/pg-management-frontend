@@ -1,0 +1,20 @@
+runtime: nodejs20
+instance_class: F1
+handlers:
+  - url: /static
+    static_dir: build/static
+    secure: always
+  
+  - url: /(.*\.(json|png|jpg|jpeg|gif|ico|svg|js|css))$
+    static_files: build/\1
+    upload: build/(.*\.(json|png|jpg|jpeg|gif|ico|svg|js|css))$
+    secure: always
+  
+  - url: /.*
+    static_files: build/index.html
+    upload: build/index.html
+    secure: always
+
+automatic_scaling:
+  min_instances: 0
+  max_instances: 10
